@@ -84,4 +84,4 @@ fn main() {
 
 ## Fin
 
-Let's get to the code.
+Let's get to the [code](https://github.com/whynotavailable/blag).
