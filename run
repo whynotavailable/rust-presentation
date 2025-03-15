@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-quarto render Rust.md --metadata-file Rust.yml --output-dir build/
+quarto render Rust.md --metadata-file Rust.yml --output-dir docs/
+touch docs/.nojekyll
