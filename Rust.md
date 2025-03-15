@@ -84,4 +84,5 @@ fn main() {
 
 ## Fin
 
-Let's get to the [code](https://github.com/whynotavailable/blag).
+- [Site Code](https://github.com/whynotavailable/blag)
+- [Errors](https://github.com/whynotavailable/whynot-errors)
