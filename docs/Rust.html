@@ -239,53 +239,53 @@ The Dot
 </ul></li>
 </ul>
 </section>
-<section id="bad-c-code" class="slide level2">
-<h2>Bad C++ Code</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href=""></a>Free<span class="op">::</span>Free<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb1-2"><a href=""></a>    <span class="kw">this</span><span class="op">-&gt;</span>str <span class="op">=</span> <span class="kw">new</span> <span class="bu">std::</span>string<span class="op">(</span><span class="st">"hi"</span><span class="op">);</span></span>
-<span id="cb1-3"><a href=""></a><span class="op">}</span></span>
-<span id="cb1-4"><a href=""></a>Free<span class="op">::~</span>Free<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb1-5"><a href=""></a>    <span class="kw">delete</span> <span class="kw">this</span><span class="op">-&gt;</span>str<span class="op">;</span></span>
-<span id="cb1-6"><a href=""></a><span class="op">}</span></span>
-<span id="cb1-7"><a href=""></a></span>
-<span id="cb1-8"><a href=""></a><span class="dt">void</span> pass<span class="op">(</span>Free f<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-9"><a href=""></a>    <span class="co">// do something with f</span></span>
-<span id="cb1-10"><a href=""></a><span class="op">}</span></span>
-<span id="cb1-11"><a href=""></a></span>
-<span id="cb1-12"><a href=""></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-13"><a href=""></a>    Free f<span class="op">;</span></span>
-<span id="cb1-14"><a href=""></a>    pass<span class="op">(</span>f<span class="op">);</span></span>
-<span id="cb1-15"><a href=""></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
 <section id="the-borrow-checker" class="slide level2">
 <h2>The Borrow Checker</h2>
 <p>It prevents you from doing nonsense with memory. Specifically it cares about all pointers and any non-pointers with data on the heap.</p>
 <p>Example…</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a href=""></a><span class="kw">fn</span> print(s<span class="op">:</span> <span class="dt">String</span>) <span class="op">{</span></span>
-<span id="cb2-2"><a href=""></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> s)<span class="op">;</span></span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb1-1"><a href=""></a><span class="kw">fn</span> print(s<span class="op">:</span> <span class="dt">String</span>) <span class="op">{</span></span>
+<span id="cb1-2"><a href=""></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> s)<span class="op">;</span></span>
+<span id="cb1-3"><a href=""></a><span class="op">}</span></span>
+<span id="cb1-4"><a href=""></a></span>
+<span id="cb1-5"><a href=""></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb1-6"><a href=""></a>    <span class="kw">let</span> a <span class="op">=</span> <span class="st">"hi"</span><span class="op">.</span>to_string()<span class="op">;</span></span>
+<span id="cb1-7"><a href=""></a>    print(a)<span class="op">;</span></span>
+<span id="cb1-8"><a href=""></a>    <span class="co">// a cannot be access anymore</span></span>
+<span id="cb1-9"><a href=""></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="bad-c-code" class="slide level2">
+<h2>Bad C++ Code</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href=""></a>Free<span class="op">::</span>Free<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-2"><a href=""></a>    <span class="kw">this</span><span class="op">-&gt;</span>str <span class="op">=</span> <span class="kw">new</span> <span class="bu">std::</span>string<span class="op">(</span><span class="st">"hi"</span><span class="op">);</span></span>
 <span id="cb2-3"><a href=""></a><span class="op">}</span></span>
-<span id="cb2-4"><a href=""></a></span>
-<span id="cb2-5"><a href=""></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb2-6"><a href=""></a>    <span class="kw">let</span> a <span class="op">=</span> <span class="st">"hi"</span><span class="op">.</span>to_string()<span class="op">;</span></span>
-<span id="cb2-7"><a href=""></a>    print(a)<span class="op">;</span></span>
-<span id="cb2-8"><a href=""></a>    <span class="co">// a cannot be access anymore</span></span>
-<span id="cb2-9"><a href=""></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a href=""></a>Free<span class="op">::~</span>Free<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-5"><a href=""></a>    <span class="kw">delete</span> <span class="kw">this</span><span class="op">-&gt;</span>str<span class="op">;</span></span>
+<span id="cb2-6"><a href=""></a><span class="op">}</span></span>
+<span id="cb2-7"><a href=""></a></span>
+<span id="cb2-8"><a href=""></a><span class="dt">void</span> pass<span class="op">(</span>Free f<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-9"><a href=""></a>    <span class="co">// do something with f</span></span>
+<span id="cb2-10"><a href=""></a><span class="op">}</span></span>
+<span id="cb2-11"><a href=""></a></span>
+<span id="cb2-12"><a href=""></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-13"><a href=""></a>    Free f<span class="op">;</span></span>
+<span id="cb2-14"><a href=""></a>    pass<span class="op">(</span>f<span class="op">);</span></span>
+<span id="cb2-15"><a href=""></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="another-example" class="slide level2">
 <h2>Another Example</h2>
-<p>This one works since <code>i32</code> implements the <code>Copy</code> trait.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a href=""></a><span class="kw">fn</span> print(s<span class="op">:</span> <span class="dt">i32</span>) <span class="op">{</span></span>
-<span id="cb3-2"><a href=""></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> s)<span class="op">;</span></span>
+<p>This one works.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource rust number-lines code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a href=""></a><span class="kw">fn</span> print<span class="op">&lt;</span>T<span class="op">:</span> <span class="bu">Display</span> <span class="op">+</span> <span class="bu">Copy</span><span class="op">&gt;</span>(obj<span class="op">:</span> T) <span class="op">{</span></span>
+<span id="cb3-2"><a href=""></a>    <span class="pp">println!</span>(<span class="st">"{}"</span><span class="op">,</span> obj)<span class="op">;</span></span>
 <span id="cb3-3"><a href=""></a><span class="op">}</span></span>
 <span id="cb3-4"><a href=""></a></span>
 <span id="cb3-5"><a href=""></a><span class="kw">fn</span> main() <span class="op">{</span></span>
-<span id="cb3-6"><a href=""></a>    <span class="kw">let</span> a<span class="op">:</span> <span class="dt">i32</span> <span class="op">=</span> <span class="dv">12</span><span class="op">;</span></span>
-<span id="cb3-7"><a href=""></a>    print(a)<span class="op">;</span></span>
-<span id="cb3-8"><a href=""></a>    print(a)<span class="op">;</span></span>
+<span id="cb3-6"><a href=""></a>    <span class="kw">let</span> i<span class="op">:</span> <span class="dt">i32</span> <span class="op">=</span> <span class="dv">42</span><span class="op">;</span></span>
+<span id="cb3-7"><a href=""></a>    print(i)<span class="op">;</span></span>
+<span id="cb3-8"><a href=""></a>    print(i)<span class="op">;</span></span>
 <span id="cb3-9"><a href=""></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="fin" class="slide level2">
-<h2>Fin</h2>
+<section id="examples" class="slide level2">
+<h2>Examples</h2>
 <ul>
 <li><a href="https://github.com/whynotavailable/blag">Site Code</a></li>
 <li><a href="https://github.com/whynotavailable/whynot-errors">Errors</a></li>

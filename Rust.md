@@ -27,6 +27,25 @@ Across the nearly 8,000,000 requests there were 264 errors (due to a mistake in 
   - Stack
   - Heap
 
+## The Borrow Checker
+
+It prevents you from doing nonsense with memory. Specifically it cares about all pointers and any non-pointers with data
+on the heap.
+
+Example...
+
+```rust
+fn print(s: String) {
+    println!("{}", s);
+}
+
+fn main() {
+    let a = "hi".to_string();
+    print(a);
+    // a cannot be access anymore
+}
+```
+
 ## Bad C++ Code
 
 ```cpp
@@ -47,42 +66,23 @@ int main(void) {
 }
 ```
 
-## The Borrow Checker
-
-It prevents you from doing nonsense with memory. Specifically it cares about all pointers and any non-pointers with data
-on the heap.
-
-Example...
-
-```rust
-fn print(s: String) {
-    println!("{}", s);
-}
-
-fn main() {
-    let a = "hi".to_string();
-    print(a);
-    // a cannot be access anymore
-}
-```
-
 ## Another Example
 
-This one works since `i32` implements the `Copy` trait.
+This one works.
 
 ```rust
-fn print(s: i32) {
-    println!("{}", s);
+fn print<T: Display + Copy>(obj: T) {
+    println!("{}", obj);
 }
 
 fn main() {
-    let a: i32 = 12;
-    print(a);
-    print(a);
+    let i: i32 = 42;
+    print(i);
+    print(i);
 }
 ```
 
-## Fin
+## Examples
 
 - [Site Code](https://github.com/whynotavailable/blag)
 - [Errors](https://github.com/whynotavailable/whynot-errors)
