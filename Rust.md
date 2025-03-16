@@ -35,12 +35,12 @@ on the heap.
 Example...
 
 ```rust
-fn print(s: String) {
-    println!("{}", s);
+fn print<T: Display>(obj: T) {
+    println!("{}", obj);
 }
 
 fn main() {
-    let a = "hi".to_string();
+    let a = String::from("hi");
     print(a);
     // a cannot be access anymore
 }
@@ -71,7 +71,7 @@ int main(void) {
 This one works.
 
 ```rust
-fn print<T: Display + Copy>(obj: T) {
+fn print<T: Display>(obj: T) {
     println!("{}", obj);
 }
 
